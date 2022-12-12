@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_warrior_player,warrior.player,model_warrior_player,base.group_user,1,1,1,1
+access_warrior_clase,warrior.clase,model_warrior_clase,base.group_user,1,1,1,1
+access_warrior_zona,warrior.zona,model_warrior_zona,base.group_user,1,1,1,1
+access_warrior_mob,warrior.mob,model_warrior_mob,base.group_user,1,1,1,1
+access_warrior_arma,warrior.arma,model_warrior_arma,base.group_user,1,1,1,1
+access_warrior_mob_type,warrior.mob_type,model_warrior_mob_type,base.group_user,1,1,1,1
+access_warrior_travel,warrior.travel,model_warrior_travel,base.group_user,1,1,1,1
+access_warrior_battle_player,warrior.battle_player,model_warrior_battle_player,base.group_user,1,1,1,1

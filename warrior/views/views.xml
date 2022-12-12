@@ -1,0 +1,490 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="warrior.player_kanban_view">
+            <field name="name">Player</field>
+            <field name="model">warrior.player</field>
+            <field name="arch" type="xml">
+                <kanban>
+                  <field name="id"/>
+                  <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill" >
+                                 <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block "
+                                                         t-attf-style="background-image:url('#{kanban_image('warrior.player', 'avatar', record.id.value, placeholder)}')">
+                                                    </div>
+                                    <div class="oe_kanban_details d-flex flex-column" >
+                                        <a type="open">
+                                            <h3 class="o_kanban_record_title oe_partner_heading">
+                                                <field name="name"/>
+                                            </h3>
+                                        </a>
+                                        <ul><h5>Stats:</h5>
+                                            <li>Nivel:
+                                                <field name="nivel"/>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="warrior.player_calendar">
+            <field name="name">Player Calendar</field>
+            <field name="model">warrior.player</field>
+            <field name="arch" type="xml">
+                <calendar string="Session Calendar" date_start="fecha"
+                          date_stop="fecha"
+                          >
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+    <record model="ir.ui.view" id="warrior.player_tree">
+      <field name="name">warrior player</field>
+      <field name="model">warrior.player</field>
+      <field name="arch" type="xml">
+        <tree decoration-danger="nivel>98">
+
+                <field name="avatar" widget="image" width="50px" height="50px"/>
+                <field name="name"/>
+                <field name="nivel"/>
+                <field name="clase"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.player_search">
+      <field name="name">player search</field>
+      <field name="model">warrior.player</field>
+      <field name="arch" type="xml">
+          
+              <search string="Player Name">
+                  <field name="name"></field>
+                  <field name="clase"></field>
+                  <filter name="max_lvl" string="Nivel máximo" domain="[('nivel','=',99)]"/>
+                  <filter name="experienced_lvl" string="Jugadores Experimentados" domain="[('nivel','>',60)]"/>
+                  <filter name="group_by_clase" string="Clase" context="{'group_by': 'clase'}"/>
+                  <filter name="group_by_zona" string="Zona" context="{'group_by': 'zona'}"/>
+
+              </search>
+              
+
+            
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.list_player">
+      <field name="name">player list</field>
+      <field name="model">warrior.player</field>
+      <field name="arch" type="xml">
+        <form>
+
+          <sheet>
+
+          <group>
+
+
+              
+            <group>
+                <header string="Datos Player"></header>
+              <field name="avatar" widget="image"/>
+             <field  name="name"/>
+            <field name="password" password="True"/>
+            <button name="aumentar_nivel" type="object" string="Increase lvl"/>
+                <button name="disminuir_nivel" type="object" string="Decrease lvl"/>
+              <field name="nivel"/>
+              <field name="xp"/>
+              <field name="xp_required"/>
+              <field name="fecha"/>
+            </group>
+            <group>
+                <header string="Estadísticas Player"></header>
+              <field name="clase"/>
+              <field name="avatar_clase" widget="image" string="Avatar Clase"/>
+
+          <field name="hp"/>
+
+          <field name="fuerza"/>
+            <field name="destreza"/>
+                <field name="armadura"/>
+                <field name="zona"/>
+            </group>
+
+          </group>
+
+             <notebook>
+              <page string="Armas">
+              <field name="arma">
+                  <tree>
+                    <field name="avatar" widget="image"/>
+                    <field name="name"/>
+                    <field name="damage"/>
+                    <field name="afinidad"/>
+                  </tree>
+              </field>
+              </page>
+                 <page string="Zona">
+
+
+                        <group>
+                    <field  name="avatar_zona" widget="image"/>
+                    <field  name="name_zona"/>
+                      <field name="dificultad_zona"/>
+                    </group>
+
+
+              </page>
+              <page string="Tienda">
+
+
+                        <group>
+                        <field  String="Comprar:" name="tienda"/>
+                    <field  name="arma_avatar" widget="image"/>
+                    <field  name="arma_nombre"/>
+                      <field name="arma_damage"/>
+                      <field  name="arma_precio"/>
+                    <field  name="arma_afinidad"/>
+                    <field name="buy_available"/>
+                      <button name="comprar_arma" type="object" string="Comprar"/>
+                    </group>
+
+
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.mob_tree">
+      <field name="name">warrior mob</field>
+      <field name="model">warrior.mob</field>
+      <field name="arch" type="xml">
+        <tree>
+
+                <field name="avatar" widget="image" width="50px" height="50px"/>
+                <field name="name"/>
+                <field name="mob_type"/>
+                <field name="zona"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.list_mob">
+      <field name="name">mob list</field>
+      <field name="model">warrior.mob</field>
+      <field name="arch" type="xml">
+
+        <form>
+          <sheet>
+          <group>
+          <field name="avatar" widget="image"/>
+          <field name="zona"/>
+          <field name="name"/>
+            <field name="hp"/>
+            <field name="damage"/>
+          <field name="mob_type"/>
+          </group>
+          
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="warrior.zona_tree">
+      <field name="name">warrior zona</field>
+      <field name="model">warrior.zona</field>
+      <field name="arch" type="xml">
+        <tree decoration-danger="dificultad=='5'" decoration-warning="dificultad=='4'" decoration-info="dificultad=='1'">
+
+                <field name="avatar" widget="image" width="100px" height="80px"/>
+                <field name="name"/>
+                <field name="dificultad"/>
+
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.list_zona">
+      <field name="name">warrior zona</field>
+      <field name="model">warrior.zona</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          <field name="avatar" widget="image"/>
+          <field name="name"/>
+
+          <field name="dificultad"/>
+
+          </group>
+            <notebook>
+            <page string="Mobs">
+              <field name="mob">
+                  <tree>
+                    <field name="avatar" widget="image"/>
+                    <field name="name"/>
+                    <field name="hp"/>
+                    <field name="damage"/>
+                    <field name="mob_type"/>
+
+                  </tree>
+              </field>
+              </page>
+              <page string="Players">
+              <field name="player" mode="kanban">
+              <kanban>
+                  <field name="id"/>
+                  <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill" >
+                                 <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block "
+                                                         t-attf-style="background-image:url('#{kanban_image('warrior.player', 'avatar', record.id.value, placeholder)}')">
+                                                    </div>
+                                    <div class="oe_kanban_details d-flex flex-column" >
+                                        <a type="open">
+                                            <h3 class="o_kanban_record_title oe_partner_heading">
+                                                <field name="name"/>
+                                                
+                                            </h3>
+                                        
+                                        <ul>
+                                            <li>Nivel:
+                                                <field name="nivel"/>
+                                            </li>
+                                            
+                                            
+                                        </ul>
+                                        </a>
+                                    </div>
+                                </div>
+                        </t>
+                    </templates>
+                </kanban>
+
+            
+              </field>
+              </page>
+            </notebook>
+            
+            
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.clase_tree">
+      <field name="name">warrior clase</field>
+      <field name="model">warrior.clase</field>
+      <field name="arch" type="xml">
+        <tree>
+
+                <field name="avatar" widget="image" width="50px" height="50px"/>
+                <field name="name"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.list_clase">
+      <field name="name">warrior clases</field>
+      <field name="model">warrior.clase</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          <field name="avatar" widget="image"/>
+          <field name="name"/>
+          <field name="hp"/>
+          <field name="fuerza"/>
+            <field name="destreza"/>
+              <field name="armadura"/>
+            
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.mob_type_tree">
+      <field name="name">warrior mob type</field>
+      <field name="model">warrior.mob_type</field>
+      <field name="arch" type="xml">
+        <tree decoration-danger="name=='Boss'">
+
+                <field name="name"/>
+        </tree>
+  
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.mob_type_form">
+      <field name="name">warrior mob type</field>
+      <field name="model">warrior.mob_type</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          
+          <field name="name"/>
+          <field name="mob"/>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+     <record model="ir.ui.view" id="warrior.arma_tree">
+      <field name="name">warrior weapon</field>
+      <field name="model">warrior.arma</field>
+      <field name="arch" type="xml">
+        <tree>
+
+                <field name="avatar" widget="image" width="50px" height="50px"/>
+                <field name="name"/>
+                <field name="damage"/>
+                <field name="afinidad"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.list_arma">
+      <field name="name">warrior armas</field>
+      <field name="model">warrior.arma</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          <field name="avatar" widget="image"/>
+          <field name="name"/>
+          <field name="damage"/>
+            <field name="afinidad"/>
+            <field name="precio"/>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+      <record model="ir.ui.view" id="warrior.list_travel">
+      <field name="name">warrior travel</field>
+      <field name="model">warrior.travel</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+            <field name="players"/>
+              <field name="zona_origen"/>
+              <field name="zona_destino"/>
+              <button name="iniciar_viaje" type="object" string="Viajar"/>
+
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+
+    
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="warrior.action_player_window">
+      <field name="name">player window</field>
+      <field name="res_model">warrior.player</field>
+      <field name="view_mode">tree,form,kanban,calendar,search</field>
+    </record>
+    <record model="ir.actions.act_window" id="warrior.action_zona_window">
+      <field name="name">zona window</field>
+      <field name="res_model">warrior.zona</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="warrior.action_mob_window">
+      <field name="name">mob window</field>
+      <field name="res_model">warrior.mob</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="warrior.action_arma_window">
+      <field name="name">arma window</field>
+      <field name="res_model">warrior.arma</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="warrior.action_mob_type_window">
+      <field name="name">mob_type window</field>
+      <field name="res_model">warrior.mob_type</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="warrior.action_clase_window">
+      <field name="name">clase window</field>
+      <field name="res_model">warrior.clase</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <record model="ir.actions.act_window" id="warrior.action_travel_window">
+      <field name="name">travel window</field>
+      <field name="res_model">warrior.travel</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="warrior.action_server">
+      <field name="name">warrior server</field>
+      <field name="model_id" ref="model_warrior_warrior"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Warrior" id="warrior.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Lista" id="warrior.menu_game" parent="warrior.menu_root"/>
+
+
+    <!-- actions -->
+
+    <menuitem name="Players" id="warrior.menu_player" parent="warrior.menu_game"
+              action="warrior.action_player_window"/>
+    <menuitem name="Clase" id="warrior.menu_clase" parent="warrior.menu_game"
+              action="warrior.action_clase_window"/>
+    <menuitem name="Zonas" id="warrior.menu_zona" parent="warrior.menu_game"
+              action="warrior.action_zona_window"/>
+    <menuitem name="Enemigos" id="warrior.menu_mob" parent="warrior.menu_game"
+              action="warrior.action_mob_window"/>
+     <menuitem name="Armas" id="warrior.menu_arma" parent="warrior.menu_game"
+              action="warrior.action_arma_window"/>
+    <menuitem name="Tipo Enemigo" id="warrior.menu_mob_type" parent="warrior.menu_game"
+              action="warrior.action_mob_type_window"/>
+    <menuitem name="Viajar" id="warrior.menu_travel" parent="warrior.menu_game"
+              action="warrior.action_travel_window"/>
+
+  </data>
+</odoo>
