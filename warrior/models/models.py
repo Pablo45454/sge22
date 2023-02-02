@@ -7,15 +7,17 @@ from odoo.exceptions import ValidationError
 
 
 class player(models.Model):
-    _name = 'warrior.player'
-    _description = 'Players'
-    name = fields.Char(required=True)
+    _name = 'res.partner'
+    _inherit = 'res.partner'
+    _description = 'Players of the game'
+    #name = fields.Char(required=True)
     password = fields.Integer()
     nivel = fields.Integer(default=1)
     hp = fields.Integer(compute="_get_hp")
     fuerza = fields.Integer(compute="_get_fuerza")
     destreza = fields.Integer(compute="_get_destreza")
     avatar = fields.Image(max_width=200,max_height=360)
+    is_player = fields.Boolean(default=False)
     def _first_weapon(self):
         return self.env['warrior.arma'].search([])[0]
     arma = fields.Many2many("warrior.arma",default=_first_weapon,readonly="True")
@@ -102,7 +104,7 @@ class player(models.Model):
 
     @api.model
     def give_xp(self):
-        players = self.env['warrior.player'].search([])
+        players = self.env['res.partner'].search([])
         for player in players:
             player.xp = player.xp+100
 
@@ -125,7 +127,7 @@ class zona(models.Model):
     avatar = fields.Image(max_width=300, max_height=300)
     dificultad = fields.Selection([('1','Neutral'),('2','Facil'),('3','Intermedio'),('4','Dificil'),('5','Experto')])
     mob = fields.One2many("warrior.mob","zona")
-    player = fields.One2many("warrior.player","zona")
+    player = fields.One2many("res.partner","zona")
 
 
 
@@ -158,7 +160,7 @@ class arma(models.Model):
 class travel(models.Model):
     _name = 'warrior.travel'
     _description = 'Travel'
-    players = fields.Many2one("warrior.player")
+    players = fields.Many2one("res.partner")
     zona_destino = fields.Many2one("warrior.zona")
     zona_origen = fields.Many2one("warrior.zona",compute="_get_zona_origen",readonly="True")
 
@@ -193,7 +195,7 @@ class travel(models.Model):
 class battle_player(models.Model):
     _name = 'warrior.battle_player'
     _description = 'Batallas Jugadores'
-    player1 = fields.Many2one("warrior.player",ondelete="cascade")
-    player2 = fields.Many2one("warrior.player",ondelete="cascade")
+    player1 = fields.Many2one("res.partner",ondelete="cascade")
+    player2 = fields.Many2one("res.partner",ondelete="cascade")
     arma1 = fields.Many2one("warrior.arma")
     arma2 = fields.Many2one("warrior.arma")

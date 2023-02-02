@@ -4,7 +4,7 @@
 
         <record model="ir.ui.view" id="warrior.player_kanban_view">
             <field name="name">Player</field>
-            <field name="model">warrior.player</field>
+            <field name="model">res.partner</field>
             <field name="arch" type="xml">
                 <kanban>
                   <field name="id"/>
@@ -13,7 +13,7 @@
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill" >
                                  <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block "
-                                                         t-attf-style="background-image:url('#{kanban_image('warrior.player', 'avatar', record.id.value, placeholder)}')">
+                                                         t-attf-style="background-image:url('#{kanban_image('res.partner', 'avatar', record.id.value, placeholder)}')">
                                                     </div>
                                     <div class="oe_kanban_details d-flex flex-column" >
                                         <a type="open">
@@ -37,7 +37,7 @@
 
     <record model="ir.ui.view" id="warrior.player_calendar">
             <field name="name">Player Calendar</field>
-            <field name="model">warrior.player</field>
+            <field name="model">res.partner</field>
             <field name="arch" type="xml">
                 <calendar string="Session Calendar" date_start="fecha"
                           date_stop="fecha"
@@ -48,7 +48,7 @@
         </record>
     <record model="ir.ui.view" id="warrior.player_tree">
       <field name="name">warrior player</field>
-      <field name="model">warrior.player</field>
+      <field name="model">res.partner</field>
       <field name="arch" type="xml">
         <tree decoration-danger="nivel>98">
 
@@ -62,7 +62,7 @@
 
     <record model="ir.ui.view" id="warrior.player_search">
       <field name="name">player search</field>
-      <field name="model">warrior.player</field>
+      <field name="model">res.partner</field>
       <field name="arch" type="xml">
           
               <search string="Player Name">
@@ -82,7 +82,7 @@
 
     <record model="ir.ui.view" id="warrior.list_player">
       <field name="name">player list</field>
-      <field name="model">warrior.player</field>
+      <field name="model">res.partner</field>
       <field name="arch" type="xml">
         <form>
 
@@ -103,6 +103,7 @@
               <field name="xp"/>
               <field name="xp_required"/>
               <field name="fecha"/>
+              <field name="is_player"/>
             </group>
             <group>
                 <header string="Estadísticas Player"></header>
@@ -249,7 +250,7 @@
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill" >
                                  <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block "
-                                                         t-attf-style="background-image:url('#{kanban_image('warrior.player', 'avatar', record.id.value, placeholder)}')">
+                                                         t-attf-style="background-image:url('#{kanban_image('res.partner', 'avatar', record.id.value, placeholder)}')">
                                                     </div>
                                     <div class="oe_kanban_details d-flex flex-column" >
                                         <a type="open">
@@ -404,7 +405,10 @@
 
     <record model="ir.actions.act_window" id="warrior.action_player_window">
       <field name="name">player window</field>
-      <field name="res_model">warrior.player</field>
+      <field name="res_model">res.partner</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('warrior.player_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('warrior.list_player')}),]" />
       <field name="view_mode">tree,form,kanban,calendar,search</field>
     </record>
     <record model="ir.actions.act_window" id="warrior.action_zona_window">

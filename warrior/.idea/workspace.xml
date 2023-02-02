@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6c9b2fdb-0598-4401-a640-e5bfbcd5f67e" name="Changes" comment="" />
+    <list default="true" id="6c9b2fdb-0598-4401-a640-e5bfbcd5f67e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/security/ir.model.access.csv" beforeDir="false" afterPath="$PROJECT_DIR$/security/ir.model.access.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/cron.xml" beforeDir="false" afterPath="$PROJECT_DIR$/views/cron.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/views.xml" beforeDir="false" afterPath="$PROJECT_DIR$/views/views.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +29,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/run/user/1000/gvfs/sftp:host=192.168.0.22,user=odoo/var/lib/odoo/modules/warrior",
+    "last_opened_file_path": "/run/user/1001/gvfs/sftp:host=192.168.8.107,user=odoo/var/lib/odoo/modules/warrior",
     "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
